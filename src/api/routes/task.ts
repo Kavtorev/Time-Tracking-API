@@ -36,6 +36,7 @@ router.put(
     const { affected } = await finishTask();
     if (!affected) {
       res.sendStatus(400);
+      return;
     }
     res.sendStatus(200);
   })
@@ -48,6 +49,7 @@ router.post(
 
     if (!name) {
       res.status(400).json({ message: "Invalid task name" });
+      return;
     }
 
     await finishTask();
