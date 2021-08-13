@@ -4,7 +4,8 @@ import request from "supertest";
 import { initializeApplication } from "../app";
 import { Task } from "../entity/Task";
 import { getTaskQueryBuilder } from "../repository/task.repo";
-import { establishMockDbConnection } from "../db";
+import { establishDbConnection } from "../db";
+import { testDbUrl } from "../config/db.config";
 
 describe("Testing user stories", () => {
   let connection: Connection;
@@ -15,7 +16,7 @@ describe("Testing user stories", () => {
     await connection.getRepository(Task).save(new Task("mock_task"));
 
   beforeAll(async () => {
-    connection = await establishMockDbConnection();
+    connection = await establishDbConnection(testDbUrl);
     app = initializeApplication();
     taskQueryBuilder = getTaskQueryBuilder();
   });

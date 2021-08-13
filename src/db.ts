@@ -1,29 +1,12 @@
 import { createConnection } from "typeorm";
 
-function establishDbConnection() {
+function establishDbConnection(url: string) {
   return createConnection({
     type: "postgres",
-    host: "localhost",
-    port: 5432,
-    username: "postgres",
-    password: "test",
-    database: "timetracker",
+    url,
     entities: [__dirname + "/entity/*.ts"],
     synchronize: true,
   });
 }
 
-function establishMockDbConnection() {
-  return createConnection({
-    type: "postgres",
-    host: "localhost",
-    port: 5432,
-    username: "postgres",
-    password: "test",
-    database: "mockdb",
-    entities: [__dirname + "/entity/*.ts"],
-    synchronize: true,
-  });
-}
-
-export { establishDbConnection, establishMockDbConnection };
+export { establishDbConnection };
