@@ -58,7 +58,7 @@
 ## How to run application
 **Clone the project**
     
-    git clone https://github.com/Kavtorev/real-time-polls.git
+    git clone https://github.com/Kavtorev/Time-Tracking-API.git
 
 **Install dependecies**
 
@@ -67,7 +67,7 @@
 **Setup environment variables inside .env file in a root directory and make sure no services are running on port 5000**
 
     NODE_ENV=development
-    NAME=YOUR_USERNAME
+    NAME=YOUR_DB_USERNAME
     PASSWORD=YOUR_DB_PASSWORD
     HOST=localhost
     DB_NAME=YOUR_DB_NAME
