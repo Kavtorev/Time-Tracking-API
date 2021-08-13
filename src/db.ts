@@ -7,7 +7,9 @@ function establishDbConnection(url: string) {
     url,
     entities: [__dirname + "/entity/*.ts"],
     synchronize: true,
-    ssl: IN_PROD,
+    ssl: {
+      rejectUnauthorized: false,
+    },
   });
 }
 
