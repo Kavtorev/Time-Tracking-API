@@ -48,6 +48,17 @@ describe("Testing user stories", () => {
     expect(previouslyRunningTask.id).not.toBe(entities[0].id);
   });
 
+  it("should stop tracking a current task & and save finish time", async () => {
+    const { id } = await createMockRunningTask();
+    await request(app).put("/api/tasks/current").expect(200);
+
+    const finishedTask = await taskQueryBuilder
+      .where("task.id = :id", { id })
+      .getOne();
+    expect(finishedTask?.isRunning).not.toBeTruthy();
+    expect(finishedTask?.finishedAt).not.toBeNull();
+  });
+
   afterAll(async () => {
     await connection.close();
   });
