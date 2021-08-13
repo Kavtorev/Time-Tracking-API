@@ -1,16 +1,8 @@
 import { createConnection } from "typeorm";
-import { IN_PROD } from "./config/app.config";
+import { PostgresConnectionOptions } from "typeorm/driver/postgres/PostgresConnectionOptions";
 
-function establishDbConnection(url: string) {
-  return createConnection({
-    type: "postgres",
-    url,
-    entities: [__dirname + "/entity/*.ts"],
-    synchronize: true,
-    ssl: {
-      rejectUnauthorized: false,
-    },
-  });
+function establishDbConnection(connectionOptions: PostgresConnectionOptions) {
+  return createConnection(connectionOptions);
 }
 
 export { establishDbConnection };

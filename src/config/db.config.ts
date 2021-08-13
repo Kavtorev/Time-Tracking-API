@@ -1,3 +1,6 @@
+import path from "path";
+import { PostgresConnectionOptions } from "typeorm/driver/postgres/PostgresConnectionOptions";
+
 const {
   NAME = "",
   PASSWORD = "",
@@ -10,6 +13,26 @@ const {
   DATABASE_URL = "",
 } = process.env;
 
-export const developmentDbUrl = `postgres://${NAME}:${PASSWORD}@${HOST}/${DB_NAME}`;
-export const testDbUrl = `postgres://${TEST_NAME}:${TEST_PASSWORD}@${TEST_HOST}/${TEST_DB_NAME}`;
-export const productionDbUrl = DATABASE_URL;
+export const devConnectionOptions: PostgresConnectionOptions = {
+  type: "postgres",
+  url: `postgres://${NAME}:${PASSWORD}@${HOST}/${DB_NAME}`,
+  entities: [path.join(__dirname, "..", "/entity/*.ts")],
+  synchronize: true,
+};
+
+export const testConnectionOptions: PostgresConnectionOptions = {
+  type: "postgres",
+  url: `postgres://${TEST_NAME}:${TEST_PASSWORD}@${TEST_HOST}/${TEST_DB_NAME}`,
+  entities: [path.join(__dirname, "..", "/entity/*.ts")],
+  synchronize: true,
+};
+
+export const prodConnectionOptions: PostgresConnectionOptions = {
+  type: "postgres",
+  url: DATABASE_URL,
+  entities: [path.join(__dirname, "..", "/entity/*.js")],
+  synchronize: true,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+};
