@@ -1,10 +1,11 @@
 import express, { NextFunction, Request, Response } from "express";
+import task from "./api/routes/task";
 
 function initializeApplication() {
   const app = express();
 
   app.use(express.json());
-
+  app.use("/api", task);
   app.use((req, res) => {
     res.status(404).json({ message: "Not Found" });
   });
