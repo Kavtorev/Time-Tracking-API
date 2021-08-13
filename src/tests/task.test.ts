@@ -59,6 +59,17 @@ describe("Testing user stories", () => {
     expect(finishedTask?.finishedAt).not.toBeNull();
   });
 
+  it("should fetch running task", async () => {
+    const { id } = await createMockRunningTask();
+    const response = await request(app).get("/api/tasks/current");
+
+    expect(response.statusCode).toBe(200);
+    expect(response.headers["content-type"]).toEqual(
+      expect.stringContaining("application/json")
+    );
+    expect(response.body.id).toBe(id);
+  });
+
   afterAll(async () => {
     await connection.close();
   });
