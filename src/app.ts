@@ -8,6 +8,13 @@ function initializeApplication() {
   app.use(express.json());
   app.use(cors());
   app.use("/api", task);
+
+  app.get("*", (req, res) => {
+    res.redirect(
+      "https://github.com/Kavtorev/Time-Tracking-API/blob/main/README.md"
+    );
+  });
+
   app.use((req, res) => {
     res.status(404).json({ message: "Not Found" });
   });
