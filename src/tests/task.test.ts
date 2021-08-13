@@ -70,6 +70,11 @@ describe("Testing user stories", () => {
     expect(response.body.id).toBe(id);
   });
 
+  it("should return a negative status code if there is no running task", async () => {
+    await request(app).get("/api/tasks/current").expect(400);
+    await request(app).put("/api/tasks/current").expect(400);
+  });
+
   afterAll(async () => {
     await connection.close();
   });
