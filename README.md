@@ -60,7 +60,7 @@
     
     git clone https://github.com/Kavtorev/Time-Tracking-API.git
 
-**Install dependecies**
+**Install dependencies**
 
     npm install
 
